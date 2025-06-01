@@ -55,9 +55,11 @@ if uploaded_file:
     img = img.resize((280, 280))
     img_np = np.array(img)
 
-    st.image(img_np, caption="Input Image", use_column_width=True)
+    st.image(img_np, caption="Input Image", use_container_width =True)
     processed = preprocess_canvas_image(img_np)
     pred = model.predict(processed)
     label = labels[np.argmax(pred)]
     confidence = np.max(pred) * 100
     st.success(f"Prediction: {label} ({confidence:.2f}%)")
+    for i, (lbl, score) in enumerate(zip(labels, pred)):
+              st.write(f"{lbl}: {score*100:.2f}%")
