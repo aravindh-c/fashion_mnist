@@ -61,5 +61,14 @@ if uploaded_file:
     label = labels[np.argmax(pred)]
     confidence = np.max(pred) * 100
     st.success(f"Prediction: {label} ({confidence:.2f}%)")
-    for i, (lbl, score) in enumerate(zip(labels, pred)):
-              st.write(f"{lbl}: {float(score)*100:.2f}%")
+    st.subheader("Class-wise Confidence Scores")
+    for lbl, score in zip(labels, pred):
+        st.write(f"{lbl}: {float(score) * 100:.2f}%")
+
+    st.subheader("Confidence Bar Chart")
+    fig, ax = plt.subplots()
+    ax.barh(labels, pred * 100, color='skyblue')
+    ax.set_xlabel("Confidence (%)")
+    ax.set_xlim(0, 100)
+    ax.invert_yaxis()
+    st.pyplot(fig)
