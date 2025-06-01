@@ -5,3 +5,4 @@ streamlit-drawable-canvas
 numpy
 pillow==11.2.1
 opencv-python-headless
+matplotlib==3.8.4
