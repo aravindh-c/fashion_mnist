@@ -63,9 +63,7 @@ if uploaded_file:
     confidence = float(np.max(pred)) * 100
     st.success(f"Prediction: {label} ({confidence:.2f}%)")
 
-    st.subheader("Class-wise Confidence Scores")
-    for lbl, score in zip(labels, pred):
-        st.write(f"{lbl}: {float(score) * 100:.2f}%")
+    
 
     st.subheader("Confidence Bar Chart")
     fig, ax = plt.subplots()
