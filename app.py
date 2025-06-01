@@ -5,6 +5,7 @@ import numpy as np
 import cv2
 from PIL import Image
 from tensorflow.keras.models import load_model
+import matplotlib.pyplot as plt
 
 # Load model
 model = load_model("fashion_model.keras")
@@ -57,10 +58,11 @@ if uploaded_file:
 
     st.image(img_np, caption="Input Image", use_container_width =True)
     processed = preprocess_canvas_image(img_np)
-    pred = model.predict(processed)
-    label = labels[np.argmax(pred)]
-    confidence = np.max(pred) * 100
+    pred = model.predict(processed).flatten()
+    label = labels[int(np.argmax(pred))]
+    confidence = float(np.max(pred)) * 100
     st.success(f"Prediction: {label} ({confidence:.2f}%)")
+
     st.subheader("Class-wise Confidence Scores")
     for lbl, score in zip(labels, pred):
         st.write(f"{lbl}: {float(score) * 100:.2f}%")
