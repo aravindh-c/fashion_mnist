@@ -62,4 +62,4 @@ if uploaded_file:
     confidence = np.max(pred) * 100
     st.success(f"Prediction: {label} ({confidence:.2f}%)")
     for i, (lbl, score) in enumerate(zip(labels, pred)):
-              st.write(f"{lbl}: {score*100:.2f}%")
+              st.write(f"{lbl}: {float(score)*100:.2f}%")
